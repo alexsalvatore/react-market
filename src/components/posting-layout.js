@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import {buildPDF} from '../helpers/pdfHelper';
+import localforage from 'localforage';
 
 const PostingLayout = (props) =>{
 
@@ -9,8 +11,24 @@ const PostingLayout = (props) =>{
         text: '',
         img : ''});
 
+    useEffect( () =>{
+        localforage.getItem('draft', (err, value)=>{
+            if(err || !value) return;
+            setPost(JSON.parse(value));
+        });
+    },[]);
+
     const onChange = (e) =>{
         setPost({...post, [e.target.name]: e.target.value});
+        localforage.setItem('draft', JSON.stringify({...post, [e.target.name]: e.target.value}));
+    }
+
+    const onSubmit = () =>{
+       // buildPDF(post);
+    }
+
+    const onPreview = () =>{
+        buildPDF(post);
     }
     return <div>
         <h2>Posting</h2>
@@ -22,7 +40,7 @@ const PostingLayout = (props) =>{
             <textarea  value={post.text} name="text" placeholder="Your text" onChange={onChange} rows="4" cols="50">
             </textarea><br/>
         </div>
-        <button>Submit</button>
+        <button onClick={onPreview}>Preview</button> <button onClick={onSubmit}>Submit</button>
     </div>;
 }
 
