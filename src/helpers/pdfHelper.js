@@ -29,7 +29,7 @@ export const buildPDF = (data) =>{
             {text: data.title.toLocaleUpperCase(), margin: [0, 22, 0, 0]},
             {text: `By ${data.author}`},
             ...paragraph,
-            {text: `Publiched in ${year}\nGenerated with Freemarket.fr` },
+            {text: `Published in ${year}\nGenerated with Freemarket.fr` },
         ]
     };
 

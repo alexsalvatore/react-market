@@ -34,7 +34,7 @@ const PostingLayout = (props) =>{
         <h2>Posting</h2>
         <div>
             <input value={post.author} name="author" placeholder="Author's name" onChange={onChange}></input><br/>
-            <input value={post.mail} name="mail" placeholder="Contact/Email" onChange={onChange}></input><br/>
+            <input value={post.mail} type="email" name="mail" placeholder="Email" onChange={onChange}></input><br/>
             <input value={post.title} name="title" placeholder="Title" onChange={onChange}></input><br/>
 
             <textarea  value={post.text} name="text" placeholder="Your text" onChange={onChange} rows="4" cols="50">
