@@ -23,11 +23,16 @@ export const buildPDF = (data) =>{
       }
     }
 
+    //Image
+    const images = [];
+    if(data.img) images.push({image: data.img, width: 300, alignment:"center", margin: [ 0, 22, 0, 22 ], rotate: 180 });
+
     const docDefinition = {
         pageSize: 'A5',
         content: [
             {text: data.title.toLocaleUpperCase(), margin: [0, 22, 0, 0]},
             {text: `By ${data.author}`},
+            ...images,
             ...paragraph,
             {text: `Published in ${year}\nGenerated with Freemarket.fr` },
         ]
